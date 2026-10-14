@@ -116,6 +116,14 @@ const starWarsCharacters = [
 
 /* SCRIVI QUI LA TUA RISPOSTA */
 
+const nomi = []
+
+for (let i = 0; i < starWarsCharacters.length; i++) {
+	nomi.push(starWarsCharacters[i].name)
+}
+
+console.log(nomi);
+
 /* ESERCIZIO 2 — Solo i femminili
    Array vuoto "personaggiFemminili". Con un for + if (gender === "female"),
    crea un nuovo oggetto { name, hair_color, eye_color } e fai push.
@@ -123,6 +131,14 @@ const starWarsCharacters = [
 */
 
 /* SCRIVI QUI LA TUA RISPOSTA */
+const personaggiFemminili = []
+for (let i = 0; i < starWarsCharacters.length; i++) {
+	if (starWarsCharacters[i].gender === 'female') {
+		personaggiFemminili.push(starWarsCharacters[i].name, starWarsCharacters[i].hair_color, starWarsCharacters[i].eye_color);
+	}
+}
+
+console.log(personaggiFemminili);
 
 /* ESERCIZIO 3 — Oggetto raggruppamento
    Crea perColoreOcchi con chiavi: blue, yellow, brown, red, blue-gray (con trattino).
@@ -130,6 +146,16 @@ const starWarsCharacters = [
 */
 
 /* SCRIVI QUI LA TUA RISPOSTA */
+
+const perColoreOcchi = {
+	blue: [],
+	yellow: [],
+	brown: [],
+	red: [],
+	"blue-gray": []
+};
+
+
 
 /* ESERCIZIO 4 — Raggruppa per colore degli occhi
    For su starWarsCharacters + switch (character.eye_color).
@@ -139,6 +165,28 @@ const starWarsCharacters = [
 
 /* SCRIVI QUI LA TUA RISPOSTA */
 
+for (let i = 0; i < starWarsCharacters.length; i++) {
+	switch (starWarsCharacters[i].eye_color) {
+		case 'blue':
+			perColoreOcchi.blue.push(starWarsCharacters[i]);
+			break;
+		case 'yellow':
+			perColoreOcchi.yellow.push(starWarsCharacters[i]);
+			break;
+		case 'brown':
+			perColoreOcchi.brown.push(starWarsCharacters[i]);
+			break;
+		case 'red':
+			perColoreOcchi.red.push(starWarsCharacters[i]);
+			break;
+		case 'blue-gray':
+			perColoreOcchi['blue-gray'].push(starWarsCharacters[i]);
+			break;
+	}
+}
+
+console.table(perColoreOcchi)
+
 /* ESERCIZIO 5 — Massa totale dell'equipaggio (while)
    i = 0, massaTotale = 0.
    While: somma Number(starWarsCharacters[i].mass).
@@ -146,6 +194,25 @@ const starWarsCharacters = [
 */
 
 /* SCRIVI QUI LA TUA RISPOSTA */
+let massaTotale = 0
+let i = 0
+while (i < starWarsCharacters.length) {
+	let n = Number(starWarsCharacters[i].mass)
+	massaTotale += n;
+	i++;
+}
+console.log(massaTotale)
+
+
+/*let massaTotale = 0
+let i = 0
+while (i < starWarsCharacters.length) {
+	massaTotale += Number(starWarsCharacters[i].mass)
+	i++;
+}
+console.log(massaTotale)
+*/ /* Perchè non funziona?/*
+
 
 /* ESERCIZIO 6 — Classifica il carico
    Su massaTotale, switch (true) o if/else if:
@@ -158,12 +225,42 @@ const starWarsCharacters = [
 
 /* SCRIVI QUI LA TUA RISPOSTA */
 
+massaTotale = 700
+
+switch (true) {
+	case massaTotale > 1000:
+		console.warn("PERICOLO: sovraccarico")
+		break;
+	case massaTotale >= 900 && massaTotale <= 1000:
+		console.log("Carico critico")
+		break;
+	case massaTotale > 700 && massaTotale < 900:
+		console.log("Attenzione: oltre 700")
+		break;
+	case massaTotale >= 500 && massaTotale <= 700:
+		console.log("Carico medio")
+		break;
+	case massaTotale = 0 || massaTotale < 500:
+		console.log("Carico leggero");
+		break;
+}
+
 /* ESERCIZIO 7 — Robotizza i n/a
    For: per ogni personaggio con gender === "n/a", cambialo in "robot".
    Stampa l'array.
 */
 
 /* SCRIVI QUI LA TUA RISPOSTA */
+
+let genderNew = [];
+
+for (let i = 0; i < starWarsCharacters.length; i++) {
+	if (starWarsCharacters[i].gender === "n/a") {
+		starWarsCharacters[i].gender = "robot";
+	}
+}
+
+console.table(starWarsCharacters);
 
 /* ESERCIZIO 8 — Più alto e più basso
    For su starWarsCharacters. Trova il personaggio con altezza maggiore e quello con altezza minore.
@@ -172,6 +269,26 @@ const starWarsCharacters = [
 */
 
 /* SCRIVI QUI LA TUA RISPOSTA */
+let alto = Number(starWarsCharacters[0].height);
+let basso = Number(starWarsCharacters[0].height);
+let nameA;
+let nameB;
+
+for (let i = 0; i < starWarsCharacters.length; i++) {
+	n = Number(starWarsCharacters[i].height)
+
+	if (n > alto) {
+		alto = n;
+		nomeA = starWarsCharacters[i].name;
+	}
+
+	else if (n < basso) {
+		basso = n;
+		nomeB = starWarsCharacters[i].name;
+	}
+}
+
+console.log(`Più alto: ${nomeA} (${alto}cm) e Più basso: ${nomeB} (${basso}cm).`)
 
 /* ESERCIZIO 9 — Rimuovi i femminili dai nomi (cicli annidati)
    Sull'array "nomi" dell'esercizio 1: for esterno su nomi, for interno su personaggiFemminili.
@@ -180,6 +297,17 @@ const starWarsCharacters = [
 */
 
 /* SCRIVI QUI LA TUA RISPOSTA */
+
+console.log(`Nomi ${nomi.length} - Personaggi femminili ${personaggiFemminili.length}`)
+
+for (let i = 0; i < nomi.length; i++) {
+	for (let j = 0; j < personaggiFemminili.length; j++)
+		if (nomi[i] === personaggiFemminili[j]) {
+			nomi.splice(i, 1)
+		}
+}
+
+console.log(`Nomi ${nomi.length} - Personaggi femminili ${personaggiFemminili.length}`)
 
 /* ESERCIZIO 10 — Personaggio casuale
    indice = Math.floor(Math.random() * starWarsCharacters.length)
